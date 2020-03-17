@@ -8,9 +8,19 @@ from .forms import CityForm
 def index(request):
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=c871a83df1450729638413a1dc4d7067'
 
+    err_msg = ''
+
     if request.method == 'POST':
         form = CityForm(request.POST)
-        form.save()
+
+        if form.is_valid():
+            new_city = form.cleaned_data['name']
+            existing_city_count = City.objects.filter(name=new_city).count()
+
+            if existing_city_count == 0 :
+                form.save()
+            else:
+                err_msg = 'City does not exist'
 
     form = CityForm()
 
