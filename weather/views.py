@@ -24,15 +24,15 @@ def index(request):
                 if r['cod'] == 200:
                     form.save()
                 else:
-                    err_msg = 'City does not exist in the world.'
+                    err_msg = 'Location does not exist in the world.'
             else:
-                err_msg = 'City does not exist'
+                err_msg = 'Location does not exist'
 
         if err_msg:
             message = err_msg
             message_class = 'is-danger'
         else:
-            message = 'City added successfully'
+            message = 'Location added successfully'
             message_class = 'is-success'
 
     form = CityForm()
